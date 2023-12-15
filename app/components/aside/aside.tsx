@@ -1,0 +1,34 @@
+import Genre from "./genre";
+import { useRouter, useSearchParams } from "next/navigation";
+
+interface Props {
+	title: string
+  genres: {}
+  searchParams: {[key: string]: string | string[] | undefined}
+}
+
+async function Aside({ title, genres, searchParams}: Props ) {
+
+  const selectedGenre = searchParams.genre;
+
+	return (
+		<>
+			<div className="aside">
+				<h2>{title}</h2>
+        {Object.keys(genres).map((genre, index) => (
+          <>
+          <Genre 
+            key={index}
+            isActive={genres[genre].name === selectedGenre ? 'active': ''}
+            genre={genres[genre].name}
+            label={genres[genre].label}
+            thumbnailSrc={genres[genre].thumbnail}
+            />            
+          </>
+            ))}
+			</div>
+		</>
+	);
+}
+
+export default Aside;
