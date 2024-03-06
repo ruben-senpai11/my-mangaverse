@@ -15,17 +15,19 @@ async function Aside({ title, genres, searchParams}: Props ) {
 		<>
 			<div className="aside">
 				<h2>{title}</h2>
-        {Object.keys(genres).map((genre, index) => (
-          <>
-          <Genre 
-            key={index}
-            isActive={genres[genre].name === selectedGenre ? 'active': ''}
-            genre={genres[genre].name}
-            label={genres[genre].label}
-            thumbnailSrc={genres[genre].thumbnail}
-            />            
-          </>
-            ))}
+        {/* <div className="genres"> */}
+          {Object.keys(genres).map((genre, index) => (
+            <>
+            <Genre 
+              key={index}
+              isActive={genres[genre].name === selectedGenre ? 'active': ''}
+              genre={genres[genre].name}
+              label={genres[genre].label}
+              thumbnailSrc={genres[genre].thumbnail}
+              />            
+            </>
+              ))}            
+        {/* </div> */}
 			</div>
 		</>
 	);

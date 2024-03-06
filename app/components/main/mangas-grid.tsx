@@ -12,10 +12,27 @@ async function MangasGrid({ title }: Props) {
 	return (
 		<>
 			<div className="main">
-				<h1 className="displayed-genre">
-					{title.length > 0 ? title : "All Verses"}
-				</h1>
+				<div className="title-ans-filters">
+					<h1 className="">
+						{title.length > 0 ? title : "All Verses"}
+					</h1>
+					<div className="filters"></div>
+				</div>
 				<div className="manga-grid">
+					{Object.keys(mangas).map((manga) => (
+						<Manga
+							key={mangas[manga].id}
+							id={mangas[manga].id}
+							coverImage={mangas[manga].cover_image}
+							name={mangas[manga].name}
+							volumesNumber={mangas[manga].volumes_number}
+							volumesUnity={mangas[manga].volumes_unity}
+							tags={mangas[manga].tags}
+							websites={mangas[manga].websites}
+							rate={mangas[manga].rate}
+							isFavorite={mangas[manga].is_favorite}
+						/>
+					))}
 					{Object.keys(mangas).map((manga) => (
 						<Manga
 							key={mangas[manga].id}

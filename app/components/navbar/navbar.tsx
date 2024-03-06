@@ -4,8 +4,11 @@ import { useState } from 'react';
 import ThemeMode from './themeMode';
 import { ChangeEvent } from 'react';
 
+interface Props{
+  title : string
+}
 
-function Navbar (){
+function Navbar ({title}:Props){
   const [searchInput, setsearchInput] = useState('');
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) =>{
@@ -20,7 +23,7 @@ function Navbar (){
       <nav className="navbar">  
         <div className="logo">
           {/* <img src={logo} alt="logo" /> */}
-          <h1>MANGAS</h1>
+          <h1>{title}</h1>
         </div>
         <div className="search-box">
           <input type="text" className="search-input" id="floatingInput" value={searchInput} onChange={handleInput}/>

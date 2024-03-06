@@ -1,9 +1,16 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
-:root {
+@layer base {
+  html {
+    font-family: "Carlito", system-ui, sans-serif;
+    font-weight: 700;
+    box-sizing: content-box;
+  }
+} */
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -25,7 +32,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-} */
+} */ */
 
 
 
