@@ -3,6 +3,8 @@ import { useState } from 'react';
 import narutoCover from '../../assets/cover/naruto-tag.jpg'
 import Favorite from './favorite';
 import Rate from './rate';
+
+
 interface Props{
   id: number,
   coverImage: string,
@@ -30,7 +32,7 @@ function Manga ({id, coverImage, name, volumesNumber, volumesUnity, tags, websit
     <>
       <div className="manga">
         <div className="cover-image">
-          <img src={coverImage} alt="" />
+          <img src={"/assets/cover/"+coverImage} alt={coverImage} />
         </div>
         <div className="details">
           <div className="name-and-volume">
@@ -42,7 +44,7 @@ function Manga ({id, coverImage, name, volumesNumber, volumesUnity, tags, websit
           </div>
           <div className="tags">
             {tags_list.map((tag, index) => (
-              <span key={index}>{tag}</span>
+              tag.length !== 0 ? <span key={index} >{tag}</span> : ""      
             ))}
           </div>
           <div className="infos">

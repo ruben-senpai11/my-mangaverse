@@ -2,8 +2,8 @@ import Genre from "./genre";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
-	title: string
-  genres: {}
+	title: string,
+  genres: {[key: string]: {name: string, label: string, thumbnail: string}},
   searchParams: {[key: string]: string | string[] | undefined}
 }
 

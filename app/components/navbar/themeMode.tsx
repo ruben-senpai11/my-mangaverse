@@ -15,8 +15,8 @@ function ThemeMode(){
     console.log(themeMode) 
   }
   useEffect(()=>{
-    localStorage.setItem("theme", themeMode);
-    const userTheme:string = localStorage.getItem("theme");
+    localStorage.setItem("theme", themeMode? themeMode : "light");
+    const userTheme:any = localStorage.getItem("theme");
     document.querySelector('html')?.setAttribute('data-theme', userTheme)
   }, [themeMode])
 
@@ -24,7 +24,7 @@ function ThemeMode(){
     <>
       <div className="theme">
         <label className="theme-switch">
-          <input type="checkbox" value={themeMode} onChange={handleToggle} defaultChecked={themeMode === "light" ? true : false}/>
+          <input type="checkbox" value={themeMode? themeMode : "light"} onChange={handleToggle} defaultChecked={themeMode === "light" ? true : false}/>
           <span className="theme-slider round"></span>
         </label>
         <span className="current-theme">{themeMode} Mode</span>
