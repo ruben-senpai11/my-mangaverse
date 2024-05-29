@@ -15,7 +15,7 @@ async function Aside({ title, genres, searchParams}: Props ) {
 		<>
 			<div className="aside">
 				<h2>{title}</h2>
-        {/* <div className="genres"> */}
+        <div className="genres">
           {Object.keys(genres).map((genre, index) => (
             <>
             <Genre 
@@ -27,7 +27,7 @@ async function Aside({ title, genres, searchParams}: Props ) {
               />            
             </>
               ))}            
-        {/* </div> */}
+        </div>
 			</div>
 		</>
 	);

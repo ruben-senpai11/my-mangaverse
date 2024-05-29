@@ -1,5 +1,8 @@
+"use client"
+
 import Link from "next/link";
 import Thumbnail from "./thumbnail";
+import { useSearchParams } from "next/navigation";
 
 
 interface Props {
@@ -11,10 +14,18 @@ interface Props {
 
 function Genre({ isActive, genre, label, thumbnailSrc}: Props) {
 
+  const searchParams = useSearchParams()
+  const filterKey = "genre";
+
 	return (
 		<>
 		 <Link
-				href={`?${new URLSearchParams({ genre: genre })}`}
+        href={`?${(() => {
+          const params = new URLSearchParams(searchParams.toString());
+          const filterValue = genre; 
+          params.set(filterKey, filterValue);
+          return params.toString();
+        })()}`}
 				className={"genre " + isActive}
 				key={genre}
 			>

@@ -9,8 +9,8 @@ function Filters() {
   return (
     <>
       <div className="filters">
-        <Dropdown filters={filter1} />
-        <Dropdown filters={filter2} />
+        <Dropdown filterName="filter1" filters={filter1} />
+        <Dropdown filterName="filter2" filters={filter2} />
       </div>
     </>
   )

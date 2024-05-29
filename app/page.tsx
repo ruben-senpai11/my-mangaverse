@@ -40,7 +40,7 @@ async function App({searchParams} : {searchParams: {[key: string]: string | stri
       <Navbar title="MANGAS"/>
       <div className="body"> 
         <Aside title="Genres" genres={genres} searchParams={searchParams} />
-        <MangasGrid title={checkUrlGenreParam ? mainTitle : ''} />
+        <MangasGrid title={checkUrlGenreParam ? mainTitle : ''} searchParams={searchParams} />
       </div>
     </>
   )

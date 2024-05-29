@@ -1,13 +1,15 @@
 "use client"
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
-
 interface Props {
+  filterName: string,
   filters: string[]
 }
 
 
-export default function Dropdown({ filters }: Props) {
+export default function Dropdown({ filterName, filters }: Props) {
 
   const [isDropped, setIsDropped] = useState(false)
 
@@ -30,19 +32,23 @@ export default function Dropdown({ filters }: Props) {
     }
   }, [])
 
-  const [currentFilter, setCurrentFilter] = useState(0)
 
-  const handleFilter = (index: number) => {
-    setCurrentFilter(index)
+
+  
+  const handleFilter = () => {
     setIsDropped(false)
   }
+  
+  const searchParams = useSearchParams()
+  const filterKey = filterName;
 
+  const currentFilter = searchParams.get(filterName) || "";
 
   return (
     <>
       <div ref={dropDownRef} >
         <button type="button" onClick={handleDropdown} className="filter flex justify-center">
-          <span >{filters[currentFilter]}</span>
+          <span >{currentFilter ? currentFilter : filters[0]}</span>
           <svg fill="currentColor" version="1.1" width="10px" height="10px" viewBox="0 0 30.727 30.727">
             <g>
               <path d="M29.994,10.183L15.363,24.812L0.733,10.184c-0.977-0.978-0.977-2.561,0-3.536c0.977-0.977,2.559-0.976,3.536,0
@@ -52,7 +58,19 @@ export default function Dropdown({ filters }: Props) {
         </button>
         <button type="button" className={(isDropped ? "flex" : "none") + " filter dropdown"}>
           {filters.map((filter, index) => (
-            index !== currentFilter ? <span key={index} onClick={() => handleFilter(index)} >{filter}</span> : ""
+            filter !== currentFilter ?
+              <Link
+                href={`?${(() => {
+                  const params = new URLSearchParams(searchParams.toString());
+                  const filterValue = filter; 
+                  params.set(filterKey, filterValue);
+                  return params.toString();
+                })()}`}
+                key={index}
+                onClick={handleFilter}
+              >
+                {filter}
+              </Link> : ""
           ))}
 
         </button>
