@@ -41,6 +41,8 @@ body {
 a{
   text-decoration: none;
   color: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 /* Scroll Bar ----------------------------------------- */
@@ -314,7 +316,7 @@ input:checked + .theme-slider:before {
   position: relative;
   transition: ease-in-out 1s;
 }
-.filter{
+.filter, .reset-filters{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -325,8 +327,11 @@ input:checked + .theme-slider:before {
   color: var(--background-color);
   background-color: var(--foreground-color)!important;
   border-radius: 4px;
-  cursor: pointer;
-  
+  cursor: pointer;  
+}
+.reset-filters{
+  padding: 4px 10px;
+  height: 100%;
 }
 
 .dropdown{

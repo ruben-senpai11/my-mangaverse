@@ -4,7 +4,6 @@ import Navbar from './components/navbar/navbar';
 import MangasGrid from './components/main/mangas-grid';
 
 import allGenres from './assets/thumbnails/Forbidden-four.jpg'
-import MangaSorting from './components/main/mangaSorting';
 
 // let genreDatas = {
 //     action: { label: "Action", thumbnailSrc: berserkSrc.src },
