@@ -4,6 +4,7 @@ import Navbar from './components/navbar/navbar';
 import MangasGrid from './components/main/mangas-grid';
 
 import allGenres from './assets/thumbnails/Forbidden-four.jpg'
+import MangaSorting from './components/main/mangaSorting';
 
 // let genreDatas = {
 //     action: { label: "Action", thumbnailSrc: berserkSrc.src },
@@ -41,6 +42,7 @@ async function App({searchParams} : {searchParams: {[key: string]: string | stri
       <div className="body"> 
         <Aside title="Genres" genres={genres} searchParams={searchParams} />
         <MangasGrid title={checkUrlGenreParam ? mainTitle : ''} searchParams={searchParams} />
+        {/* <MangaSorting searchParams={searchParams}/> */}
       </div>
     </>
   )

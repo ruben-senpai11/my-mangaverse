@@ -3,9 +3,13 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
+interface Filter {
+  key: string,
+  value: string
+}
 interface Props {
   filterName: string,
-  filters: string[]
+  filters: Filter[]
 }
 
 
@@ -34,21 +38,24 @@ export default function Dropdown({ filterName, filters }: Props) {
 
 
 
-  
+
   const handleFilter = () => {
     setIsDropped(false)
   }
-  
+
   const searchParams = useSearchParams()
   const filterKey = filterName;
 
-  const currentFilter = searchParams.get(filterName) || "";
+  const currentFilterKey = searchParams.get(filterName) || "All";
+  const currentFilter : any = filters.find(filter => filter.key === currentFilterKey)?.value;
 
   return (
     <>
       <div ref={dropDownRef} >
         <button type="button" onClick={handleDropdown} className="filter flex justify-center">
-          <span >{currentFilter ? currentFilter : filters[0]}</span>
+          <span >
+            {currentFilter ? currentFilter : filters[0].value}
+          </span>
           <svg fill="currentColor" version="1.1" width="10px" height="10px" viewBox="0 0 30.727 30.727">
             <g>
               <path d="M29.994,10.183L15.363,24.812L0.733,10.184c-0.977-0.978-0.977-2.561,0-3.536c0.977-0.977,2.559-0.976,3.536,0
@@ -58,19 +65,20 @@ export default function Dropdown({ filterName, filters }: Props) {
         </button>
         <button type="button" className={(isDropped ? "flex" : "none") + " filter dropdown"}>
           {filters.map((filter, index) => (
-            filter !== currentFilter ?
+            currentFilterKey !== (filter.key || "All" ) ?
               <Link
                 href={`?${(() => {
                   const params = new URLSearchParams(searchParams.toString());
-                  const filterValue = filter; 
+                  const filterValue = filter.key;
                   params.set(filterKey, filterValue);
                   return params.toString();
                 })()}`}
                 key={index}
                 onClick={handleFilter}
               >
-                {filter}
-              </Link> : ""
+                {filter.value}
+              </Link> 
+            : ""
           ))}
 
         </button>

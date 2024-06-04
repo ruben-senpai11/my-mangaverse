@@ -362,6 +362,7 @@ input:checked + .theme-slider:before {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 10px;
+  background-color: var(--background-color);
 }
 .manga{
   width: 30%;

@@ -7,6 +7,7 @@ interface Props {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
+
 async function MangasGrid({ title, searchParams }: Props) {
 
   const response = await fetch('http://localhost:9000/mangas', { cache: 'reload' });
@@ -17,13 +18,52 @@ async function MangasGrid({ title, searchParams }: Props) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
-  const genre: any = searchParams.genre || "All"
+  const genre: any = searchParams.genre || ""
   const tag = capitalizeFirstLetter(genre);
 
   const filter1 = searchParams.filter1;
   const filter2 = searchParams.filter2;
 
+  let tagSet, filter1Set, filter2Set = "false"
+  const filterAndSortMangas = (mangas: any) => {
 
+
+    const mangaArray = Object.values(mangas);
+
+    let filteredMangasId = []
+
+    let filteredMangas = mangaArray.filter((manga: any) =>
+      tag.length === 0 || manga.tags.includes(tag)
+    );
+
+
+
+
+    const orderByNewest = filter1 === "mostPopular" ? true : false;
+    const orderByOldst = filter1 === "lessPopular" ? true : false;
+
+    orderByNewest ? filteredMangas.sort((a: any, b: any) => b.rate - a.rate) : null
+    orderByOldst ? filteredMangas.sort((a: any, b: any) => a.rate - b.rate) : null
+
+
+
+    if (filter2 === 'asc') {
+      filteredMangas.sort((a: any, b: any) => a.name.localeCompare(b.name));
+      console.log("filter2A");
+    } else if (filter2 === "desc") {
+      filteredMangas.sort((a: any, b: any) => b.name.localeCompare(a.name));
+      console.log("filter2B");
+    }
+
+    // Collect the IDs of the filtered mangas
+    filteredMangasId = filteredMangas.map((manga: any) => manga.id);
+    console.log(mangaArray.length);
+    console.log(filteredMangasId);
+
+    return filteredMangasId;
+  };
+
+  const filteredMangasId = filterAndSortMangas(mangas);
   return (
     <>
       <div className="aside-holder"></div>
@@ -34,43 +74,26 @@ async function MangasGrid({ title, searchParams }: Props) {
           </h1>
           <Filters />
         </div>
+        {filteredMangasId.length}
         <div className="manga-grid">
-          {Object.keys(mangas).map((manga, index) => (
-            tag && tag.length > 0 && mangas[manga].tags.includes(tag) ?
-
+          {filteredMangasId.map((mangaId) => (
+            mangas[mangaId] ? (
               <Manga
-                key={index}
-                id={mangas[manga].id}
-                coverImage={mangas[manga].cover_image}
-                name={mangas[manga].name}
-                volumesNumber={mangas[manga].volumes_number}
-                volumesUnity={mangas[manga].volumes_unity}
-                tags={mangas[manga].tags}
-                websites={mangas[manga].websites}
-                rate={mangas[manga].rate}
-                isFavorite={mangas[manga].is_favorite}
+                key={mangas[mangaId].id}
+                id={mangas[mangaId].id}
+                coverImage={mangas[mangaId].cover_image}
+                name={mangas[mangaId].name}
+                volumesNumber={mangas[mangaId].volumes_number}
+                volumesUnity={mangas[mangaId].volumes_unity}
+                tags={mangas[mangaId].tags}
+                websites={mangas[mangaId].websites}
+                rate={mangas[mangaId].rate}
+                isFavorite={mangas[mangaId].is_favorite}
               />
-              :
-              ""
+            ) : null
           ))}
-          {Object.keys(mangas).map((manga, index) => (
-            tag === "All" ?
 
-              <Manga
-                key={index}
-                id={mangas[manga].id}
-                coverImage={mangas[manga].cover_image}
-                name={mangas[manga].name}
-                volumesNumber={mangas[manga].volumes_number}
-                volumesUnity={mangas[manga].volumes_unity}
-                tags={mangas[manga].tags}
-                websites={mangas[manga].websites}
-                rate={mangas[manga].rate}
-                isFavorite={mangas[manga].is_favorite}
-              />
-              :
-              ""
-          ))}
+          {/* <MangasSorting mangas={mangas} /> */}
         </div>
       </div>
     </>
