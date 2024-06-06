@@ -37,8 +37,6 @@ export default function Dropdown({ filterName, filters }: Props) {
   }, [])
 
 
-
-
   const handleFilter = () => {
     setIsDropped(false)
   }

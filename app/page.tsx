@@ -1,7 +1,7 @@
 import './App.css'
 import Aside from './components/aside/aside';
 import Navbar from './components/navbar/navbar';
-import MangasGrid from './components/main/mangas-grid';
+import Main from './components/main/main';
 
 import allGenres from './assets/thumbnails/Forbidden-four.jpg'
 
@@ -38,9 +38,9 @@ async function App({searchParams} : {searchParams: {[key: string]: string | stri
   return (
     <>
       <Navbar title="MANGAS"/>
-      <div className="body"> 
+      <div className="container"> 
         <Aside title="Genres" genres={genres} searchParams={searchParams} />
-        <MangasGrid title={checkUrlGenreParam ? mainTitle : ''} searchParams={searchParams} />
+        <Main title={checkUrlGenreParam ? mainTitle : ''} searchParams={searchParams} />
         {/* <MangaSorting searchParams={searchParams}/> */}
       </div>
     </>

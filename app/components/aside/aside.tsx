@@ -1,5 +1,5 @@
 import Genre from "./genre";
-import { useRouter, useSearchParams } from "next/navigation";
+import "./aside.css"
 
 interface Props {
 	title: string,

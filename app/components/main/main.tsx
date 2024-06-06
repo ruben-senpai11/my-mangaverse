@@ -1,6 +1,7 @@
 import Manga from "./manga";
 import arrowDown from "../../../public/assets/icons/arrow-down.svg"
 import Filters from "./filters";
+import "./main.css"
 
 interface Props {
   title: string | string[] | any;
@@ -19,7 +20,7 @@ interface Manga{
   is_favorite: "true" | "false";
 };
 
-async function MangasGrid({ title, searchParams }: Props) {
+async function Main({ title, searchParams }: Props) {
 
   const response = await fetch('http://localhost:9000/mangas', { cache: 'reload' });
   const mangas: Manga[] = await response.json()
@@ -62,8 +63,10 @@ async function MangasGrid({ title, searchParams }: Props) {
     return filteredMangas;
   };
 
-  const filteredMangas: Manga[]  = filterAndSortMangas(mangas);
-  console.log(filteredMangas)
+  const filteredMangas: Manga[[]]  = filterAndSortMangas(mangas);
+  // console.log(filteredMangas)
+
+
   return (
     <>
       <div className="aside-holder"></div>
@@ -74,9 +77,9 @@ async function MangasGrid({ title, searchParams }: Props) {
           </h1>
           <Filters />
         </div>
-        {Object.keys(filteredMangas).map((manga, index) => (
+        {/* {Object.keys(filteredMangas).map((manga, index) => (
           <span>{filteredMangas[manga].id} </span>
-        ))}
+        ))} */}
         <div className="manga-grid">
           {Object.keys(filteredMangas).map((manga, index) => (
             <Manga
@@ -100,4 +103,4 @@ async function MangasGrid({ title, searchParams }: Props) {
   );
 }
 
-export default MangasGrid;
+export default Main;
