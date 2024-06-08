@@ -7,8 +7,12 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  gap: 10px;
 }
 
+.title{
+  text-wrap: nowrap;
+}
 .view-and-filters {
   /* width: 100%; */
   display: flex;
@@ -28,10 +32,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   width: max-content;
-  font-size: 18px;
-  padding: 5px 15px;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 7px 15px;
   color: var(--background-color);
   border-radius: 4px;
   cursor: pointer;
@@ -53,6 +58,7 @@
 
 .dropdown a {
   width: 100%;
+  font-weight: 400;
   padding: 0px 15px;
   border-radius: 2px;
   color: inherit;
@@ -61,7 +67,7 @@
 }
 
 .manga-grid {
-  padding-top: .7em;
+  padding-top: .5em;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -139,9 +145,12 @@
   font-size: 1em;
 }
 
-.available-on a {
+.manga-links, .more {
   text-decoration: none;
   width: 105px;
+  max-width: 105px;
+  overflow: hidden;
+  text-wrap: nowrap;
 }
 
 .more button {
@@ -202,14 +211,6 @@
 
 
 @media screen and (min-width: 2560px) {
-  .navbar {
-    padding: 0.8rem 4rem;
-  }
-
-  .container {
-    padding: 1rem 5rem;
-  }
-
   .manga {
     width: 15%;
     margin-bottom: 2.1%;

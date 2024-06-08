@@ -8,7 +8,7 @@ interface Props {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-interface Manga{
+interface MangaProps{
   id: number;
   name: string;
   cover_image: string;
@@ -23,7 +23,7 @@ interface Manga{
 async function Main({ title, searchParams }: Props) {
 
   const response = await fetch('http://localhost:9000/mangas', { cache: 'reload' });
-  const mangas: Manga[] = await response.json()
+  const mangas: MangaProps[] = await response.json()
 
 
   function capitalizeFirstLetter(word: string): string {
@@ -36,15 +36,20 @@ async function Main({ title, searchParams }: Props) {
   const filter1 = searchParams.filter1;
   const filter2 = searchParams.filter2;
 
-  const filterAndSortMangas = (mangas: Manga[]) => {
+  const filterAndSortMangas = (mangas: MangaProps[]) => {
 
     const mangaArray = Object.values(mangas);
 
-    let filteredMangas = mangaArray.filter((manga: Manga) =>
+    let filteredMangas = mangaArray.filter((manga: MangaProps) =>
       tag.length === 0 || manga.tags.includes(tag)
     );
 
 
+    if (filter2 === 'asc') {
+      filteredMangas.sort((a: any, b: any) => a.name.localeCompare(b.name));
+    } else if (filter2 === "desc") {
+      filteredMangas.sort((a: any, b: any) => b.name.localeCompare(a.name));
+    }
     const orderByNewest = filter1 === "mostPopular" ? true : false;
     const orderByOldst = filter1 === "lessPopular" ? true : false;
 
@@ -53,17 +58,11 @@ async function Main({ title, searchParams }: Props) {
 
 
 
-    if (filter2 === 'asc') {
-      filteredMangas.sort((a: any, b: any) => a.name.localeCompare(b.name));
-    } else if (filter2 === "desc") {
-      filteredMangas.sort((a: any, b: any) => b.name.localeCompare(a.name));
-    }
-
 
     return filteredMangas;
   };
 
-  const filteredMangas: Manga[[]]  = filterAndSortMangas(mangas);
+  const filteredMangas: MangaProps[]  = filterAndSortMangas(mangas);
   // console.log(filteredMangas)
 
 
@@ -83,16 +82,16 @@ async function Main({ title, searchParams }: Props) {
         <div className="manga-grid">
           {Object.keys(filteredMangas).map((manga, index) => (
             <Manga
-              key={filteredMangas[manga].id}
-              id={filteredMangas[manga].id}
-              coverImage={filteredMangas[manga].cover_image}
-              name={filteredMangas[manga].name}
-              volumesNumber={filteredMangas[manga].volumes_number}
-              volumesUnity={filteredMangas[manga].volumes_unity}
-              tags={filteredMangas[manga].tags}
-              websites={filteredMangas[manga].websites}
-              rate={filteredMangas[manga].rate}
-              isFavorite={filteredMangas[manga].is_favorite}
+              key={filteredMangas[index].id}
+              id={filteredMangas[index].id}
+              coverImage={filteredMangas[index].cover_image}
+              name={filteredMangas[index].name}
+              volumesNumber={filteredMangas[index].volumes_number}
+              volumesUnity={filteredMangas[index].volumes_unity}
+              tags={filteredMangas[index].tags}
+              websites={filteredMangas[index].websites}
+              rate={filteredMangas[index].rate}
+              isFavorite={filteredMangas[index].is_favorite}
             />
           ))}
 

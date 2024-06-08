@@ -6,7 +6,7 @@
 
 .aside{
   width: 230px;
-  max-height: 80vh;
+  max-height: calc(100vh - 120px);
   padding-top: .8em;
   padding-bottom: 1em;
   display: flex;

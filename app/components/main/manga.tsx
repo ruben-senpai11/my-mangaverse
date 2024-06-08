@@ -51,7 +51,7 @@ function Manga ({id, coverImage, name, volumesNumber, volumesUnity, tags, websit
             <div className="available-on">
               <h3>Available on:</h3>
               {websites_list.map((website, index) => (
-                <span key={index}><a href={(website)} target="_blank">{new URL(website).hostname}</a></span>
+                <span key={index}><a href={(website)} target="_blank" className="manga-links">{new URL(website).hostname}</a></span>
               ))}
               <span className="more"><button type='button'>see more...</button></span>
             </div>
