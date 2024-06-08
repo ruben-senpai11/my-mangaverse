@@ -3,6 +3,7 @@ import { useState } from 'react';
 import narutoCover from '../../assets/cover/naruto-tag.jpg'
 import Favorite from './favorite';
 import Rate from './rate';
+import Image from 'next/image';
 
 
 interface Props{
@@ -32,7 +33,7 @@ function Manga ({id, coverImage, name, volumesNumber, volumesUnity, tags, websit
     <>
       <div className="manga">
         <div className="cover-image">
-          <img src={"/assets/cover/"+coverImage} alt={coverImage} />
+          <Image src={"/assets/cover/"+coverImage} width={500} height={100} alt={coverImage} />
         </div>
         <div className="details">
           <div className="name-and-volume">

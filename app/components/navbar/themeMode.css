@@ -65,6 +65,10 @@ input:checked + .theme-slider:before {
   font-size: 16px;
 }
 
+
+
+
+
 .multiple-theme{
   border: 0;
 }

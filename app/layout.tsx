@@ -16,6 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <link rel="icon" href="/Konoha-logo.jpg" type="image/jpeg" />
       {/* <body >{children}</body> */}
       <body className={inter.className}>{children}</body>
     </html>

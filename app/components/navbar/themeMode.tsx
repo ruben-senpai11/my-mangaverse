@@ -3,9 +3,12 @@ import "./themeMode.css"
 
 function ThemeMode() {
 
-  const [themeMode, setThemeMode] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
-  );
+  
+  const [themeMode, setThemeMode] = useState( ()=>{
+    const currentTheme = localStorage.getItem("theme")
+    return currentTheme ? currentTheme : "light"
+  });
+
 
   const handleToggle = () => {
     if (themeMode === 'light') {

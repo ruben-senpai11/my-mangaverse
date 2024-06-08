@@ -15,7 +15,7 @@ function Navbar({ title }: Props) {
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setsearchInput(event.target.value)
   }
-  const searchIcon = (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
+  const searchIcon = (<svg width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
   </svg>);
 
@@ -31,40 +31,9 @@ function Navbar({ title }: Props) {
       setmobileNav(false)
     }
   }
-  function setNavFalse() {
-    setmobileNav(false)
-    window.scrollTo({
-      behavior: 'smooth'
-    });
-  }
+  
 
-  //Nav Buttons Handle
-  function smoothScrollTo(targetId: any) {
-    setNavFalse()
-    const target = document.getElementById(targetId);
-    if (target) {
-      window.scrollTo({
-        top: target.offsetTop,
-        behavior: 'smooth'
-      });
-    }
-  }
-
-  //Retrieve device's width
-
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-
+  
   return (
     <>
       <div className="navbar">
