@@ -1,5 +1,4 @@
 import Manga from "./manga";
-import arrowDown from "../../../public/assets/icons/arrow-down.svg"
 import Filters from "./filters";
 import "./main.css"
 

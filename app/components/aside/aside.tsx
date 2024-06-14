@@ -1,5 +1,5 @@
 import Genre from "./genre";
-import ".\/aside.css"
+import "./aside.css"
 
 interface Props {
 	title: string,
