@@ -3,45 +3,85 @@ import Aside from './components/aside/aside';
 import Navbar from './components/navbar/navbar';
 import Main from './components/main/main';
 
-import allGenres from './assets/thumbnails/Forbidden-four.jpg'
+import { createClient } from '@supabase/supabase-js'
 
-// let genreDatas = {
-//     action: { label: "Action", thumbnailSrc: berserkSrc.src },
-//     shonen: { label: "Shonen", thumbnailSrc: narutoSrc.src },
-//     comedy : { label: "Comedy", thumbnailSrc: grandBlueSrc.src },
-//     drama : { label: "Drama", thumbnailSrc: zetsuenSrc.src },
-//     adventure : { label: "Adventure", thumbnailSrc: onePieceSrc.src },
-//     thriller : { label: "Thriller", thumbnailSrc: kingdomSrc.src },
-//     intellect : { label: "Intellect", thumbnailSrc: psychoPassSrc.src }
-//   }
+const supabaseUrl = 'https://xdliufymtwhainhnlzas.supabase.co'
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+if (!supabaseKey) {
+  throw new Error('SUPABASE_KEY is not defined in environment variables');
+}
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 
-async function App({searchParams} : {searchParams: {[key: string]: string | string[] | undefined }}){
 
+async function App({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+
+/*
   const response = await fetch('http://localhost:9000/genres', { cache: ('no-store') });
   const genres = await response.json()
   
-  const mainTitle = searchParams.genre;
+  */
   
-  const genreExists = () =>{
+  const fetchGenres = async () => {
+    const { data, error } = await supabase
+      .from('genres')
+      .select('*');
+
+    if (error) {
+      console.error('Error fetching data:', error);
+      return;
+    }
+
+    return data
+  };
+
+  fetchGenres();
+
+  const fetchMangas = async () => {
+    const { data, error } = await supabase
+      .from('mangas')
+      .select('*');
+
+    if (error) {
+      console.error('Error fetching data:', error);
+      return;
+    }
+    console.log(data)
+
+    return data
+  };
+
+  fetchMangas();
+
+  const genres = await fetchGenres();
+
+  const mangas = await fetchMangas();
+
+  const mainTitle = searchParams.genre;
+
+  const genreExists = () => {
     let value = false;
-    {Object.keys(genres).map((genre) =>{
-      if (mainTitle == genres[genre].name){
-        value = true;
-      } 
-    })}
+    {
+      Object.keys(genres ?? {}).map((genre, index) => {
+        if (genres) {
+          if (mainTitle == genres[index].name) {
+            value = true;
+          }
+        }
+      })
+    }
     return value;
   }
 
-  const checkUrlGenreParam =  genreExists()
-  
+  const checkUrlGenreParam = genreExists()
+
   return (
     <>
-      <Navbar title="MANGAS"/>
-      <div className="container"> 
-        <Aside title="Genres" genres={genres} searchParams={searchParams} />
-        <Main title={checkUrlGenreParam ? mainTitle : ''} searchParams={searchParams} />
-        {/* <MangaSorting searchParams={searchParams}/> */}
+      <Navbar title="MANGAS" />
+      <div className="container">
+        <Aside title="Genres" searchParams={searchParams} genres={genres} />
+        <Main title={checkUrlGenreParam ? mainTitle : ''} searchParams={searchParams} mangas={mangas} />
       </div>
     </>
   )

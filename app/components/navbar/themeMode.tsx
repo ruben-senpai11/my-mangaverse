@@ -5,28 +5,14 @@ function ThemeMode() {
 
   
   const [themeMode, setThemeMode] = useState( ()=>{
-    const currentTheme = localStorage.getItem("theme")
-    return currentTheme ? currentTheme : "light"
+    const currentTheme = localStorage? localStorage.getItem("theme") : "zen"
+    return currentTheme ? currentTheme : "zen"
   });
 
 
-  const handleToggle = () => {
-    if (themeMode === 'light') {
-      setThemeMode('dark')
-    } else {
-      setThemeMode('light')
-    }
-
-    console.log(themeMode)
-  }
-
-  const handleTheme = (theme:string) => {
-    setThemeMode(theme);
-  }
-
   useEffect(() => {
-    localStorage.setItem("theme", themeMode ? themeMode : "light");
-    const userTheme: any = localStorage.getItem("theme");
+    localStorage.setItem("theme", themeMode ? themeMode : "zen");
+    const userTheme: any = localStorage ? localStorage.getItem("theme") : "zen";
     document.querySelector('html')?.setAttribute('data-theme', userTheme)
   }, [themeMode])
 

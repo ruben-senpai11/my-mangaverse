@@ -3,11 +3,6 @@ import arrowDown from "../../../public/assets/icons/arrow-down.svg"
 import Filters from "./filters";
 import "./main.css"
 
-interface Props {
-  title: string | string[] | any;
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
 interface MangaProps{
   id: number;
   name: string;
@@ -20,10 +15,13 @@ interface MangaProps{
   is_favorite: "true" | "false";
 };
 
-async function Main({ title, searchParams }: Props) {
+interface Props {
+  title: string | string[] | any;
+  searchParams: { [key: string]: string | string[] | undefined }
+  mangas : any,
+}
 
-  const response = await fetch('http://localhost:9000/mangas', { cache: 'reload' });
-  const mangas: MangaProps[] = await response.json()
+async function Main({ title, searchParams, mangas }: Props) {
 
 
   function capitalizeFirstLetter(word: string): string {

@@ -3,7 +3,7 @@ import ".\/aside.css"
 
 interface Props {
 	title: string,
-  genres: {[key: string]: {name: string, label: string, thumbnail: string}},
+  genres: any,
   searchParams: {[key: string]: string | string[] | undefined}
 }
 
