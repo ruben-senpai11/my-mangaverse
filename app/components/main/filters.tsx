@@ -32,7 +32,7 @@ function Filters() {
     <>
       <div className="view-and-filters">
         <div className={(gridView ? "filters" : "show-filtersSS") + " filters"} >
-          <Link href="/" >
+          <Link href="//" >
             <button className="reset-filters flex justify-center" title="Réinitialiser" >
               <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
