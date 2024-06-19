@@ -2,7 +2,7 @@ import Manga from "./manga";
 import Filters from "./filters";
 import "./main.css"
 
-interface MangaProps{
+interface MangaProps {
   id: number;
   name: string;
   cover_image: string;
@@ -17,7 +17,7 @@ interface MangaProps{
 interface Props {
   title: string | string[] | any;
   searchParams: { [key: string]: string | string[] | undefined }
-  mangas : any,
+  mangas: any,
 }
 
 async function Main({ title, searchParams, mangas }: Props) {
@@ -59,14 +59,22 @@ async function Main({ title, searchParams, mangas }: Props) {
     return filteredMangas;
   };
 
-  const filteredMangas: MangaProps[]  = filterAndSortMangas(mangas);
-  // console.log(filteredMangas)
+  const filteredMangas: MangaProps[] = filterAndSortMangas(mangas);
 
 
   return (
     <>
       <div className="aside-holder"></div>
-      <div className="main">
+      <div className="main flex ">
+        <div className="description ">
+          <p>
+            Find here ALL the well-known anime & mangas.
+            You can reach any of them in one single search !
+          </p>
+          <p>
+            {/* Futhermore, you can in one search find out a manga even when you don't know the exact name, enjoy! */}
+          </p>
+        </div>
         <div className="title-and-filters">
           <h1 className="title">
             {title.length > 0 ? title : "All Verses"}

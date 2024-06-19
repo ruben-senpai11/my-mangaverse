@@ -43,7 +43,7 @@ function Filters() {
           <Dropdown filterName="filter2" filters={filter2} />
           <Dropdown filterName="filter1" filters={filter1} />
         </div>
-        <div className="">
+        <div className="none">
           <button type="button" onClick={handleFilters} className="reset-filters view flex justify-center align-center">
             {/* Afficher en {gridView ? "Grille" : "Liste"} */}
             <svg className={gridView ? "flex" : "none"} width="20" height="20" fill="currentColor" viewBox="0 0 16 16">

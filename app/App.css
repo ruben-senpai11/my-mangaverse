@@ -73,6 +73,9 @@ a{
   display: none!important;
 }
 
+.direction-column{
+  flex-direction: column;
+}
 .align-center{
   align-items: center;
 }
@@ -268,6 +271,9 @@ input:focus + .theme-slider {
 
 /* Main ------------------------------------------- */
 
+.description-heart{
+  color: var(--primary);
+}
 .filter, .reset-filters{
   background-color: var(--foreground-color)!important;
 }

@@ -38,7 +38,7 @@ function Navbar({ title }: Props) {
     <>
       <div className="navbar">
         <div className="logo">
-          <Link href="//">
+          <Link href="/">
             {/* <img src={logo} alt="logo" /> */}
             <h1>{title}</h1>
           </Link>
@@ -49,7 +49,7 @@ function Navbar({ title }: Props) {
               <input type="text" className="search-input" id="floatingInput" value={searchInput} onChange={handleInput} />
               <label htmlFor="floatingInput" className={searchInput.length > 0 ? 'displayed-none' : 'displayed-flex'}>
                 {searchIcon}
-                <span>Find the manga you deserve</span>
+                <span className="help-text">Find the manga you deserve</span>
               </label>
             </div>
           </div>

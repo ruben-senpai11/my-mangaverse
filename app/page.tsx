@@ -47,7 +47,6 @@ async function App({ searchParams }: { searchParams: { [key: string]: string | s
       console.error('Error fetching data:', error);
       return;
     }
-    console.log(data)
 
     return data
   };
