@@ -193,14 +193,19 @@
 
 @media screen and (max-width: 580px) {
   .search-input {
-    padding: 0!important;
-    /* padding-left: 2px!important; */
+    padding-left: 2px;
+    padding-right: 0;
   }
 }
 
 @media screen and (max-width: 380px) {
   .search-box span {
     display: block;
-    padding: 0;
+  }
+  .search-box label{
+    height: 30px;
+  }
+  .help-text{
+    display: none!important;
   }
 }

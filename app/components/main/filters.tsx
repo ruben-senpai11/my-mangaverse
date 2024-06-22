@@ -1,24 +1,22 @@
 "use client"
-
 import Link from "next/link"
 import Dropdown from "./dropdown"
 import { useState } from "react";
 
 
 function Filters() {
-
+  
   const filter1 = [
     { key: "mostPopular", value: "Les plus populaires" },
     { key: "lessPopular", value: "Les moins populaires" },
     { key: "newest", value: "Les plus récents" },
-    { key: "oldest", value: "Les plus anciens" }
-  ]
-  const filter2 = [
+    { key: "oldest", value: "Les plus anciens" },
     { key: "asc", value: "A - Z" },
     { key: "desc", value: "Z - A" },
-    { key: "onGoing", value: "En cours" },
-    { key: "paused", value: "En pause" },
-    { key: "finished", value: "Terminé" }
+  ]
+  const filter2 = [
+    { key: "anime", value: "Anime" },
+    { key: "manga", value: "Mangas" },
   ];
 
   const [gridView, setGridView] = useState(true);
@@ -32,7 +30,7 @@ function Filters() {
     <>
       <div className="view-and-filters">
         <div className={(gridView ? "filters" : "show-filtersSS") + " filters"} >
-          <Link href="//" >
+          <Link href="/" >
             <button className="reset-filters flex justify-center" title="Réinitialiser" >
               <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
@@ -40,7 +38,7 @@ function Filters() {
               </svg>
             </button>
           </Link>
-          <Dropdown filterName="filter2" filters={filter2} />
+          <Dropdown filterName="type" filters={filter2} />
           <Dropdown filterName="filter1" filters={filter1} />
         </div>
         <div className="none">

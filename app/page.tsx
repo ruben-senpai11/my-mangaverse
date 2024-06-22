@@ -4,6 +4,7 @@ import Navbar from './components/navbar/navbar';
 import Main from './components/main/main';
 
 import { createClient } from '@supabase/supabase-js'
+import { getMangas } from './actions/getMangas';
 
 const supabaseUrl = 'https://xdliufymtwhainhnlzas.supabase.co'
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -17,12 +18,23 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 async function App({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
 
-/*
-  const response = await fetch('http://localhost:9000/genres', { cache: ('no-store') });
-  const genres = await response.json()
+  let mPerPage = 5;
+  let page =  parseInt(searchParams.load);
   
-  */
+  let mangas = await getMangas(page, mPerPage)
   
+  
+
+
+
+  /*
+    Datas from local Express.js api
+
+    const response = await fetch('http://localhost:9000/genres', { cache: ('no-store') });
+    const genres = await response.json()
+    
+    */
+
   const fetchGenres = async () => {
     const { data, error } = await supabase
       .from('genres')
@@ -52,11 +64,8 @@ async function App({ searchParams }: { searchParams: { [key: string]: string | s
   };
 
   fetchMangas();
-
   const genres = await fetchGenres();
-
-  const mangas = await fetchMangas();
-
+  // const mangas = await fetchMangas();
   const mainTitle = searchParams.genre;
 
   const genreExists = () => {

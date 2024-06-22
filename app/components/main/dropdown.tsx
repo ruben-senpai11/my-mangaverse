@@ -68,7 +68,7 @@ export default function Dropdown({ filterName, filters }: Props) {
                 href={`?${(() => {
                   const params = new URLSearchParams(searchParams.toString());
                   const filterValue = filter.key;
-                  params.set(filterKey, filterValue);
+                  params.set(filterKey, filter.key);
                   return params.toString();
                 })()}`}
                 key={index}

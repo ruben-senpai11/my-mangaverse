@@ -12,8 +12,8 @@ interface Props{
   name: string,
   volumesNumber: number,
   volumesUnity: string,
-  tags: string,
-  websites: string,
+  tags: [],
+  websites: [],
   rate: number,
   isFavorite: "true" | "false"
 }
@@ -26,14 +26,12 @@ function Manga ({id, coverImage, name, volumesNumber, volumesUnity, tags, websit
     return setFavorite("true")
   }
 
-  const tags_list = tags.split(' ');
-  const websites_list = websites.split(' ');
-
   return(
     <>
       <div className="manga">
         <div className="cover-image">
-          <Image src={"/assets/cover/"+coverImage} width={500} height={100} alt={coverImage} />
+          {/* <Image src={"/assets/cover/"+coverImage} width={500} height={100} alt={coverImage} /> */}
+          <Image src={coverImage} width={500} height={100} alt={coverImage} />
         </div>
         <div className="details">
           <div className="name-and-volume">
@@ -44,15 +42,15 @@ function Manga ({id, coverImage, name, volumesNumber, volumesUnity, tags, websit
             </span>
           </div>
           <div className="tags">
-            {tags_list.map((tag, index) => (
+            {tags.map((tag:string, index) => (
               tag.length !== 0 ? <span key={index} >{tag}</span> : ""      
             ))}
           </div>
           <div className="infos">
             <div className="available-on">
               <h3>Available on:</h3>
-              {websites_list.map((website, index) => (
-                <span key={index}><a href={(website)} target="_blank" className="manga-links">{new URL(website).hostname}</a></span>
+              {websites.map((website:any, index) => (
+                index<2 && <span key={index}><a href={(website.url)} target="_blank" className="manga-links">{website.site}</a></span>
               ))}
               <span className="more"><button type='button'>see more...</button></span>
             </div>

@@ -1,6 +1,8 @@
 import Manga from "./manga";
 import Filters from "./filters";
 import "./main.css"
+import { InfiniteScroll } from "../InfiniteScroll";
+import MangasGrid from "./mangasGrid";
 
 interface MangaProps {
   id: number;
@@ -53,13 +55,9 @@ async function Main({ title, searchParams, mangas }: Props) {
     orderByNewest ? filteredMangas.sort((a: any, b: any) => b.rate - a.rate) : null
     orderByOldst ? filteredMangas.sort((a: any, b: any) => a.rate - b.rate) : null
 
-
-
-
     return filteredMangas;
   };
 
-  const filteredMangas: MangaProps[] = filterAndSortMangas(mangas);
 
 
   return (
@@ -68,40 +66,27 @@ async function Main({ title, searchParams, mangas }: Props) {
       <div className="main flex ">
         <div className="description ">
           <p>
-            Find here ALL the well-known anime & mangas.
+            Find here ALL (or almost) anime & mangas right here.
             You can reach any of them in one single search !
           </p>
-          <p>
-            {/* Futhermore, you can in one search find out a manga even when you don't know the exact name, enjoy! */}
-          </p>
+          {/* <p>Futhermore, you can in one search find out a manga even when you don't know the exact name, enjoy!</p> */}
         </div>
         <div className="title-and-filters">
-          <h1 className="title">
-            {title.length > 0 ? title : "All Verses"}
-          </h1>
+          <div className="genres-menu flex align-center">
+            <div className="genres-burger flex flex-column none">
+              <span className="burger"></span>
+              <span className="burger"></span>
+              <span className="burger"></span>
+            </div>
+            <h1 className="title">
+              {title.length > 0 ? title : "All Verses"}
+            </h1>
+          </div>
           <Filters />
         </div>
-        {/* {Object.keys(filteredMangas).map((manga, index) => (
-          <span>{filteredMangas[manga].id} </span>
-        ))} */}
-        <div className="manga-grid">
-          {Object.keys(filteredMangas).map((manga, index) => (
-            <Manga
-              key={filteredMangas[index].id}
-              id={filteredMangas[index].id}
-              coverImage={filteredMangas[index].cover_image}
-              name={filteredMangas[index].name}
-              volumesNumber={filteredMangas[index].volumes_number}
-              volumesUnity={filteredMangas[index].volumes_unity}
-              tags={filteredMangas[index].tags}
-              websites={filteredMangas[index].websites}
-              rate={filteredMangas[index].rate}
-              isFavorite={filteredMangas[index].is_favorite}
-            />
-          ))}
-
-          {/* <MangasSorting mangas={mangas} /> */}
-        </div>
+        <MangasGrid initialMangas={mangas} />
+        {/* <p>Loaded : {mangas.data.Page.media.length} </p> */}
+        <InfiniteScroll/>
       </div>
     </>
   );
