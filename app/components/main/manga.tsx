@@ -30,7 +30,7 @@ function Manga ({id, coverImage, name, volumesNumber, volumesUnity, tags, websit
     <>
       <div className="manga">
         <div className="cover-image">
-          {/* <Image src={"/assets/cover/"+coverImage} width={500} height={100} alt={coverImage} /> */}
+          {/* <Image src={"/assets/cover/"+coverImage} width={300} height={100} alt={coverImage} /> */}
           <Image src={coverImage} width={300} height={100} alt={coverImage} />
         </div>
         <div className="details">

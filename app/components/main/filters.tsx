@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 function Filters() {
-  
+
   const filter1 = [
     { key: "mostPopular", value: "Les plus populaires" },
     { key: "lessPopular", value: "Les moins populaires" },
@@ -38,8 +38,12 @@ function Filters() {
               </svg>
             </button>
           </Link>
-          <Dropdown filterName="type" filters={filter2} />
-          <Dropdown filterName="filter1" filters={filter1} />
+          <div className="relative">
+            <Dropdown filterName="filter1" filters={filter1} />
+          </div>
+          <div className="relative">
+            <Dropdown filterName="type" filters={filter2} />
+          </div>
         </div>
         <div className="none">
           <button type="button" onClick={handleFilters} className="reset-filters view flex justify-center align-center">

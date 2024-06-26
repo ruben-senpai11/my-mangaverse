@@ -93,7 +93,6 @@
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 10px;
-  position: relative;
 }
 .scrollToTop{
   position: fixed;

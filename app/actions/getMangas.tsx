@@ -2,17 +2,17 @@
 import { cookies } from 'next/headers'
 
 async function getPage() {
-  const cookieStore = cookies() 
-  let page:any = await cookieStore.get("loadMore")?.value || 1
-  console.log("pageOnCookie "+page)
- 
+  const cookieStore = cookies()
+  let page: any = await cookieStore.get("loadMore")?.value || 1
+ // console.log("pageOnCookie " + page)
+
   return page
 }
 
-export async function getMangas(page:number, perPage: number) {
+export async function getMangas(type: string, page: number, perPage: number) {
 
   //let cookiePage = getPage()
-  
+
   const query = `
     query ($page: Int, $perPage: Int) {
       Page (page: $page, perPage: $perPage) {
@@ -41,6 +41,7 @@ export async function getMangas(page:number, perPage: number) {
           meanScore
         }
       }
+      GenreCollection
     }
   `;
 
@@ -66,7 +67,8 @@ export async function getMangas(page:number, perPage: number) {
     const response = await fetch(url, options);
     const data = await response.json();
     if (response.ok) {
-      return data.data.Page.media; // Assuming your data structure from AniList
+      console.log(data)
+      return data.data.Page.media; 
     } else {
       throw new Error(`Failed to fetch mangas: ${data.errors}`);
     }
@@ -74,5 +76,5 @@ export async function getMangas(page:number, perPage: number) {
     console.error('Error fetching mangas:', error);
     throw error; // Rethrow the error to handle it in the calling component
   }
-  
+
 }

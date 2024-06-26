@@ -24,12 +24,12 @@ async function App({ searchParams }: { searchParams: { [key: string]: string | s
 
 
   const cookieStore = cookies()
-  let page: any = searchParams.load || 1
+  let page:any = searchParams.load || 1
+  let type:any = searchParams.type || "anime"
 
   let perPage = 50;
-  let mangas = await getMangas(page, perPage)
-
-
+  let mangas = await getMangas(type, page, perPage)
+  
 
 
 
