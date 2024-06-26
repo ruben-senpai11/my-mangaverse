@@ -31,7 +31,7 @@ function Manga ({id, coverImage, name, volumesNumber, volumesUnity, tags, websit
       <div className="manga">
         <div className="cover-image">
           {/* <Image src={"/assets/cover/"+coverImage} width={500} height={100} alt={coverImage} /> */}
-          <Image src={coverImage} width={500} height={100} alt={coverImage} />
+          <Image src={coverImage} width={300} height={100} alt={coverImage} />
         </div>
         <div className="details">
           <div className="name-and-volume">
@@ -43,7 +43,7 @@ function Manga ({id, coverImage, name, volumesNumber, volumesUnity, tags, websit
           </div>
           <div className="tags">
             {tags.map((tag:string, index) => (
-              tag.length !== 0 ? <span key={index} >{tag}</span> : ""      
+              tag.length !== 0 ? index<4 && <span key={index} >{tag}</span> : ""      
             ))}
           </div>
           <div className="infos">

@@ -1,10 +1,19 @@
 "use client"
+import React from 'react';
 import { useEffect, useState, useRef, useCallback } from "react";
+
+import loadImage from "../../public/assets/icons/loading.gif"
 
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useRouter } from "next/navigation";
+import Cookies from 'js-cookie'
+import Image from 'next/image';
 
 export function InfiniteScroll() {
+
+  function resetPath(){
+    router.push(pathname + '?' + createQueryString('load', "1"), {scroll:false})
+  }
 
   const router = useRouter()
   const pathname = usePathname()
@@ -20,26 +29,26 @@ export function InfiniteScroll() {
     [searchParams]
   )
 
- 
-  const currentLoad = searchParams.has("load") ? searchParams.get('load') : "0"
-
   const [load, setLoad] = useState("0");
-  const targetRef = useRef(null);
 
+  const targetRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setLoad(prevLoad => {
-            const param = parseInt(prevLoad) + 1;
-            const newLoad = param.toString()
-            router.push(pathname + '?' + createQueryString('load', newLoad))
+            const value = Cookies.get("loadMore") || "1";
+            const currentLoad = Number(value)+1
+            const reload:string = currentLoad.toString()
+            
+            router.push(pathname + '?' + createQueryString('load', reload))
+            setLoad(reload)
+            console.log("newLoad:"+ reload);
+            Cookies.set('loadMore', reload)
 
-            console.log("newLoad:"+ newLoad);
-
-            return newLoad;
-          });
+            return reload;
+        }else{
+          setTimeout(resetPath, 2000)
         }
       },
       { threshold: 0.1 }
@@ -58,8 +67,17 @@ export function InfiniteScroll() {
 
   return (
     <>
-      <div ref={targetRef} className="i-scroll">
-      <p>Loading 50 more .... </p>
+      <div 
+        ref={targetRef} 
+        id="scroll" 
+        className="i-scroll flex align-center"
+      >
+      <Image src={loadImage} width={40} height={40} alt="loading"  className="loadGif"
+        onLoad={()=>(
+          Cookies.set('loadMore', "1"), 
+          router.push(pathname + '?' + createQueryString('load', "1"))
+        )}/>
+      {/* <p>loading </p> */}
       </div>
     </>
   )

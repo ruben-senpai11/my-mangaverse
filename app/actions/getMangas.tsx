@@ -1,7 +1,18 @@
 "use server"
+import { cookies } from 'next/headers'
+
+async function getPage() {
+  const cookieStore = cookies() 
+  let page:any = await cookieStore.get("loadMore")?.value || 1
+  console.log("pageOnCookie "+page)
+ 
+  return page
+}
 
 export async function getMangas(page:number, perPage: number) {
 
+  //let cookiePage = getPage()
+  
   const query = `
     query ($page: Int, $perPage: Int) {
       Page (page: $page, perPage: $perPage) {
@@ -24,6 +35,7 @@ export async function getMangas(page:number, perPage: number) {
             site
             url          
           }
+          isAdult
         }
       }
     }
@@ -59,4 +71,5 @@ export async function getMangas(page:number, perPage: number) {
     console.error('Error fetching mangas:', error);
     throw error; // Rethrow the error to handle it in the calling component
   }
+  
 }

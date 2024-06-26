@@ -36,7 +36,7 @@ function Navbar({ title }: Props) {
   
   return (
     <>
-      <div className="navbar">
+      <div id="navbar" className="navbar">
         <div className="logo">
           <Link href="/">
             {/* <img src={logo} alt="logo" /> */}

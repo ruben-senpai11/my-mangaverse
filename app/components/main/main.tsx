@@ -20,9 +20,10 @@ interface Props {
   title: string | string[] | any;
   searchParams: { [key: string]: string | string[] | undefined }
   mangas: any,
+  reload: number
 }
 
-async function Main({ title, searchParams, mangas }: Props) {
+async function Main({ title, searchParams, mangas, reload }: Props) {
 
 
   function capitalizeFirstLetter(word: string): string {
@@ -84,7 +85,7 @@ async function Main({ title, searchParams, mangas }: Props) {
           </div>
           <Filters />
         </div>
-        <MangasGrid initialMangas={mangas} />
+        <MangasGrid initialMangas={mangas} reload={reload} />
         {/* <p>Loaded : {mangas.data.Page.media.length} </p> */}
         <InfiniteScroll/>
       </div>

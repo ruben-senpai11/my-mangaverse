@@ -1,10 +1,14 @@
 import './App.css'
 import Aside from './components/aside/aside';
-import Navbar from './components/navbar/navbar';
+import Navbar from './components/navigation/navbar';
 import Main from './components/main/main';
 
 import { createClient } from '@supabase/supabase-js'
 import { getMangas } from './actions/getMangas';
+import Footer from './components/navigation/footer';
+
+import { cookies } from 'next/headers'
+import Cookies from 'js-cookie'
 
 const supabaseUrl = 'https://xdliufymtwhainhnlzas.supabase.co'
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -16,14 +20,21 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 
 
-async function App({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+async function App({ searchParams }: { searchParams: { [key: string]: string | string[] | any } }) {
 
-  let mPerPage = 5;
-  let page =  parseInt(searchParams.load);
-  
-  let mangas = await getMangas(page, mPerPage)
-  
-  
+
+  const cookieStore = cookies()
+  //let page:any = cookieStore.get("loadMore")?.value || 1
+  let page: any = searchParams.load || 1
+
+
+  /*
+  console.log("pageOnServer ", page)
+  */
+  let perPage = 24;
+  let mangas = await getMangas(page, perPage)
+
+
 
 
 
@@ -89,8 +100,9 @@ async function App({ searchParams }: { searchParams: { [key: string]: string | s
       <Navbar title="MANGAS" />
       <div className="container">
         <Aside title="Genres" searchParams={searchParams} genres={genres} />
-        <Main title={checkUrlGenreParam ? mainTitle : ''} searchParams={searchParams} mangas={mangas} />
+        <Main title={checkUrlGenreParam ? mainTitle : ''} searchParams={searchParams} mangas={mangas} reload={page} />
       </div>
+      {/* <Footer/> */}
     </>
   )
 
