@@ -36,6 +36,9 @@ export async function getMangas(page:number, perPage: number) {
             url          
           }
           isAdult
+          seasonYear
+          popularity
+          meanScore
         }
       }
     }

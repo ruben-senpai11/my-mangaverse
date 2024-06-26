@@ -24,14 +24,9 @@ async function App({ searchParams }: { searchParams: { [key: string]: string | s
 
 
   const cookieStore = cookies()
-  //let page:any = cookieStore.get("loadMore")?.value || 1
   let page: any = searchParams.load || 1
 
-
-  /*
-  console.log("pageOnServer ", page)
-  */
-  let perPage = 24;
+  let perPage = 50;
   let mangas = await getMangas(page, perPage)
 
 

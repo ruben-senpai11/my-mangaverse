@@ -194,7 +194,6 @@ input:focus+.theme-slider {
 }
 
 .theme-dropdown {
-  /* b: 2px solid var(--primary); */
   background-color: #f6f0f1;
 }
 
@@ -271,21 +270,6 @@ input:focus+.theme-slider {
 }
 
 
-/* Main Content -------------------------------------------- */
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 2em;
-  gap: 0;
-}
-
-.aside,
-.aside-holder,
-.main {
-  margin-top: 100px;
-}
-
 /* Sidebar ------------------------------------------------- */
 
 .genre {
@@ -304,6 +288,19 @@ input:focus+.theme-slider {
 
 
 /* Main ------------------------------------------- */
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2em;
+  gap: 0;
+}
+
+.aside,
+.aside-holder,
+.main {
+  margin-top: 100px;
+}
 
 .description-heart {
   color: var(--primary);
@@ -349,9 +346,12 @@ input:focus+.theme-slider {
 }
 
 .rate .bi {
-  color: var(--primary);
+  color: var(--primary); 
 }
 
+.scrollToTop{
+  box-shadow: 0 0 5px var(--primary);
+}
 
 @media screen and (min-width: 2560px) {
   .container {

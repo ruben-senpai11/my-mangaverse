@@ -50,6 +50,7 @@ export default function MangasGrid({ initialMangas, reload }: Props) {
     <>
       <div className="manga-grid">
         {mangas.map((manga: any, index: number) => (
+          manga.episodes>12  && manga.popularity>30000 && manga.isAdult==false &&
           <Manga
             key={manga.id}
             id={manga.id + manga.title.romaji}
