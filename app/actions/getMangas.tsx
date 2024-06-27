@@ -41,7 +41,6 @@ export async function getMangas(type: string, page: number, perPage: number) {
           meanScore
         }
       }
-      GenreCollection
     }
   `;
 
@@ -67,7 +66,7 @@ export async function getMangas(type: string, page: number, perPage: number) {
     const response = await fetch(url, options);
     const data = await response.json();
     if (response.ok) {
-      console.log(data)
+      //console.log(data)
       return data.data.Page.media; 
     } else {
       throw new Error(`Failed to fetch mangas: ${data.errors}`);

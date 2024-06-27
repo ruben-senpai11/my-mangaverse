@@ -40,7 +40,7 @@ export default function MangasGrid({ initialMangas, reload }: Props) {
 
     if (toLoad) {
       setMangas((mangas: any) => [...mangas, ...initialMangas]);
-      window.scrollTo({ top: horizontalDistance });
+      //window.scrollTo({ top: horizontalDistance });
     }
 
   }, [initialMangas, reload]);

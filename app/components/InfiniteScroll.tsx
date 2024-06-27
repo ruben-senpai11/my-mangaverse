@@ -41,14 +41,14 @@ export function InfiniteScroll() {
             const currentLoad = Number(value)+1
             const reload:string = currentLoad.toString()
             
-            router.push(pathname + '?' + createQueryString('load', reload))
+            router.push(pathname + '?' + createQueryString('load', reload), {scroll: false})
             setLoad(reload)
-            console.log("newLoad:"+ reload);
+            //console.log("newLoad:"+ reload);
             Cookies.set('loadMore', reload)
 
             return reload;
         }else{
-          setTimeout(resetPath, 2000)
+          setTimeout(resetPath, 1000)
         }
       },
       { threshold: 0.1 }
@@ -75,7 +75,7 @@ export function InfiniteScroll() {
       <Image src={loadImage} width={40} height={40} alt="loading"  className="loadGif"
         onLoad={()=>(
           Cookies.set('loadMore', "1"), 
-          router.push(pathname + '?' + createQueryString('load', "1"))
+          resetPath()
         )}/>
       {/* <p>loading </p> */}
       </div>
