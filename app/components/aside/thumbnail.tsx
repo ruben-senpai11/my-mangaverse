@@ -6,7 +6,7 @@ interface Props{
 
 function Thumbnail({thumbnailSrc}:Props){
   return(
-    <Image className="thumbnail" width={100} height={100} src={thumbnailSrc} alt="" />
+    <Image className="thumbnail" width={100} height={100} src={"./assets/thumbnails"+thumbnailSrc} alt="" />
   )
 }
 
