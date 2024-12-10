@@ -29,7 +29,7 @@ function Genre({ isActive, genre, label, thumbnailSrc}: Props) {
 				className={"genre " + isActive}
 				key={genre}
 			>
-			<Thumbnail thumbnailSrc={"/assets/thumbnails"+thumbnailSrc}></Thumbnail>
+			<Thumbnail thumbnailSrc={thumbnailSrc}></Thumbnail>
 			<h3 className="label">{label}</h3>
 		</Link>
 		</>

@@ -80,7 +80,7 @@ async function Main({ title, searchParams, mangas, reload }: Props) {
               <span className="burger"></span>
             </div>
             <h1 className="title">
-              {title.length > 0 ? title : "All Verses"}
+              {title ? title : "All Verses"}
             </h1>
           </div>
           <Filters />

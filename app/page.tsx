@@ -3,34 +3,23 @@ import Aside from './components/aside/aside';
 import Navbar from './components/navigation/navbar';
 import Main from './components/main/main';
 
-import { createClient } from '@supabase/supabase-js'
+import fs from 'fs';
+import path from 'path';
+import Papa from 'papaparse';
+
 import { getMangas } from './actions/getMangas';
-import Footer from './components/navigation/footer';
-
 import { cookies } from 'next/headers'
-import Cookies from 'js-cookie'
-
-const supabaseUrl = 'https://xdliufymtwhainhnlzas.supabase.co'
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-if (!supabaseKey) {
-  throw new Error('SUPABASE_KEY is not defined in environment variables');
-}
-const supabase = createClient(supabaseUrl, supabaseKey)
-
 
 
 async function App({ searchParams }: { searchParams: { [key: string]: string | string[] | any } }) {
 
 
   const cookieStore = cookies()
-  let page:any = searchParams.load || 1
-  let type:any = searchParams.type || "anime"
+  let page: any = searchParams.load || 1
+  let type: any = searchParams.type || "anime"
 
   let perPage = 50;
   let mangas = await getMangas(type, page, perPage)
-  
-
 
 
   /*
@@ -41,43 +30,18 @@ async function App({ searchParams }: { searchParams: { [key: string]: string | s
     
     */
 
-  const fetchGenres = async () => {
-    const { data, error } = await supabase
-      .from('genres')
-      .select('*');
+  const filePath = path.join(process.cwd(), 'public', 'genres.csv');
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const { data: response } = Papa.parse(fileContent, { header: true });
+  const genres:any = response
 
-    if (error) {
-      console.error('Error fetching data:', error);
-      return;
-    }
-
-    return data
-  };
-
-  fetchGenres();
-
-  const fetchMangas = async () => {
-    const { data, error } = await supabase
-      .from('mangas')
-      .select('*');
-
-    if (error) {
-      console.error('Error fetching data:', error);
-      return;
-    }
-
-    return data
-  };
-
-  fetchMangas();
-  const genres = await fetchGenres();
-  // const mangas = await fetchMangas();
   const mainTitle = searchParams.genre;
 
   const genreExists = () => {
     let value = false;
     {
-      Object.keys(genres ?? {}).map((genre, index) => {
+     // Object.keys(genres ?? {}).map((genre, index) => {
+        genres.forEach((genre:string, index:number) => {
         if (genres) {
           if (mainTitle == genres[index].name) {
             value = true;
