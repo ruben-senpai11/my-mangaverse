@@ -67,7 +67,7 @@ async function Main({ title, searchParams, mangas, reload }: Props) {
       <div className="main flex ">
         <div className="description ">
           <p>
-            Find here ALL (or almost) anime & mangas right here.
+            Find ALL (or almost) anime & mangas right here.
             You can reach any of them in one single search !
           </p>
           {/* <p>Futhermore, you can in one search find out a manga even when you don't know the exact name, enjoy!</p> */}
