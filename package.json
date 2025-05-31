@@ -16,7 +16,7 @@
     "graphql": "^16.8.2",
     "js-cookie": "^3.0.5",
     "mysql": "^2.18.1",
-    "next": "^14.2.3",
+    "next": "^15.3.3",
     "papaparse": "^5.4.1",
     "react": "^18",
     "react-dom": "^18",

@@ -114,6 +114,37 @@ button span {
   padding: 0;
 }
 
+button.btn {
+  margin: 0;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+svg circle,
+svg ellipse {
+  color: var(--primary);
+}
+
+.svg-foreground{
+  fill: var(--foreground-color);
+}
+.svg-primary{
+  fill: var(--primary);
+}
+.svg-secondary{
+  fill: var(--dark-primary);
+}
+
+.account-icon {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  stroke-linejoin: round;
+  stroke-miterlimit: 2;
+}
 
 /* Scroll Bar ----------------------------------------- */
 
@@ -197,11 +228,13 @@ input:focus+.theme-slider {
   background-color: #f6f0f1;
 }
 
-.multiple-theme:hover {
+.multiple-theme:hover, .navbar button:hover {
   cursor: pointer;
+  outline-color: var(--primary);  
+  border-color: none;
 }
 
-.multiple-theme:focus {
+.multiple-theme:focus, .navbar button:focus {
   outline-color: var(--light-primary);
 }
 
@@ -346,10 +379,10 @@ input:focus+.theme-slider {
 }
 
 .rate .bi {
-  color: var(--primary); 
+  color: var(--primary);
 }
 
-.scrollToTop{
+.scrollToTop {
   box-shadow: 0 0 5px var(--primary);
 }
 
